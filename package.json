@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Websocket Sequence",
   "main": "index.js",
+  "dependencies": {
+    "reconnecting-websocket": "^3.2.2",
+    "text-encoding": "0.6.4"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:cutsin/ws-sequence.git"
