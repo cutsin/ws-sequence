@@ -2,16 +2,7 @@
   "name": "ws-sequence",
   "version": "0.0.2",
   "description": "Websocket Sequence",
-  "main": "lib/index.js",
-  "dependencies": {},
-  "scripts": {
-    "build": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-cli": "^6.26.0",
-    "babel-preset-stage-2": "^6.24.1"
-  },
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:cutsin/ws-sequence.git"
