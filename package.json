@@ -3,9 +3,17 @@
   "version": "0.3.0",
   "description": "Websocket Sequence",
   "main": "index.js",
+  "scripts": {
+    "build": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
+  },
   "dependencies": {
     "reconnecting-websocket": "^3.2.2",
     "text-encoding": "0.6.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-stage-2": "^6.24.1"
   },
   "repository": {
     "type": "git",
