@@ -1,11 +1,17 @@
 {
   "presets": [
-    "stage-2"
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["ie 11"]
+      }
+    }],
+    "stage-0"
   ],
   "comments": false,
   "env": {
     "test": {
-      "presets": ["stage-2"]
+      "presets": ["stage-0"]
     }
   }
 }
