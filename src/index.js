@@ -15,7 +15,7 @@ const getMsg = evt => {
 class WS {
   constructor ({uri, binaryType, ping}) {
     this.uri = uri
-    this.binaryType = binaryType || (process.env.NODE_ENV === 'production' ? 'arraybuffer' : 'blob')
+    this.binaryType = binaryType || (typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 'arraybuffer' : 'blob')
     this.id = 10
     this.sendQueue = []
     this.callbacks = new Map()
