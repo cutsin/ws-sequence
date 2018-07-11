@@ -1,6 +1,6 @@
 {
   "name": "ws-sequence",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Websocket Sequence",
   "main": "lib/index.js",
   "scripts": {
