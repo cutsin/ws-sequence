@@ -14,7 +14,9 @@
     "babel-core": "^6.26.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1"
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-entries": "^1.0.0"
   },
   "repository": {
     "type": "git",

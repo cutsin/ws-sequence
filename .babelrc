@@ -1,12 +1,15 @@
 {
   "presets": [
     ["env", {
-      "modules": "commonjs",
       "targets": {
         "browsers": ["ie 11"]
       }
     }],
     "stage-0"
+  ],
+  "plugins": [
+    "add-module-exports",
+    "transform-object-entries"
   ],
   "comments": false,
   "env": {
