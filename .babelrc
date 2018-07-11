@@ -1,7 +1,7 @@
 {
   "presets": [
     ["env", {
-      "modules": false,
+      "modules": "commonjs",
       "targets": {
         "browsers": ["ie 11"]
       }
