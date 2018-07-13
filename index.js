@@ -32,10 +32,9 @@ class WS {
     let connected = ConnectedSockets[uri]
     if (connected) return (this.ws = connected)
     this.ws = connected = ConnectedSockets[uri] = new ReconnectingWebSocket(uri)
-    // send msg records befor open
+    // send msg records before open
     this.ws.addEventListener('open', () => {
       this.ws.binaryType = this.binaryType
-      this.sendQueue.forEach(req => this.send)
       while (this.sendQueue.length) {
         this.send(this.sendQueue.shift())
       }
@@ -61,9 +60,9 @@ class WS {
       msg = JSON.stringify(msg)
     }
     const data = this.binaryType === 'arraybuffer' ? new TextEncoder().encode(msg).buffer : msg
-    try {
+    if (this.ws.readyState === 1) {
       this.ws.send(data)
-    } catch (e) {
+    } else {
       this.sendQueue.push(msg)
     }
   }
