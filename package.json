@@ -2,11 +2,22 @@
   "name": "ws-sequence",
   "version": "1.6.1",
   "description": "Websocket Sequence",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "cjs/index.js",
+  "module": "mjs/index.js",
+  "scripts": {
+    "build-mjs": "node_modules/babel-cli/bin/babel.js src --out-dir mjs",
+    "build-cjs": "node_modules/babel-cli/bin/babel.js src --out-dir cjs --presets env,stage-0 --no-babelrc",
+    "build": "npm run build-mjs && npm run build-cjs"
+  },
   "dependencies": {
     "reconnecting-websocket": "^3.2.2",
-    "text-encoding": "0.6.4"
+    "text-encoding": "^0.6.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1"
   },
   "repository": {
     "type": "git",
