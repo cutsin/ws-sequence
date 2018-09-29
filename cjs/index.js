@@ -12,19 +12,18 @@ var _reconnectingWebsocket = require('reconnecting-websocket');
 
 var _reconnectingWebsocket2 = _interopRequireDefault(_reconnectingWebsocket);
 
-var _textEncoding = require('text-encoding');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var defaultBinaryType = typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 'arraybuffer' : 'blob';
 var ConnectedSockets = {};
 
 var getMsg = function getMsg(evt) {
   var msg = evt.data;
   if (!msg) return evt;
   if (evt.data instanceof ArrayBuffer) {
-    msg = new _textEncoding.TextDecoder().decode(msg);
+    msg = new TextDecoder().decode(msg);
   }
   return JSON.parse(msg);
 };
@@ -34,13 +33,14 @@ var WS = function () {
     var _this = this;
 
     var uri = _ref.uri,
-        binaryType = _ref.binaryType,
+        _ref$binaryType = _ref.binaryType,
+        binaryType = _ref$binaryType === undefined ? defaultBinaryType : _ref$binaryType,
         ping = _ref.ping;
 
     _classCallCheck(this, WS);
 
     this.uri = uri;
-    this.binaryType = binaryType || (typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 'arraybuffer' : 'blob');
+    this.binaryType = typeof TextEncoder === 'undefined' ? 'blob' : binaryType;
     this.id = 10;
     this.sendQueue = [];
     this.callbacks = new Map();
@@ -88,7 +88,7 @@ var WS = function () {
         if (cb) this.callbacks.set(msg.id, cb);
         msg = JSON.stringify(msg);
       }
-      var data = this.binaryType === 'arraybuffer' ? new _textEncoding.TextEncoder().encode(msg).buffer : msg;
+      var data = this.binaryType === 'arraybuffer' ? new TextEncoder().encode(msg).buffer : msg;
       if (this.ws.readyState === 1) {
         this.ws.send(data);
       } else {

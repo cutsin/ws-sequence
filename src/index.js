@@ -1,6 +1,6 @@
 import ReconnectingWebSocket from 'reconnecting-websocket'
-import {TextEncoder, TextDecoder} from 'text-encoding'
 
+const defaultBinaryType = typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 'arraybuffer' : 'blob'
 const ConnectedSockets = {}
 
 const getMsg = evt => {
@@ -13,9 +13,9 @@ const getMsg = evt => {
 }
 
 class WS {
-  constructor ({uri, binaryType, ping}) {
+  constructor ({uri, binaryType = defaultBinaryType, ping}) {
     this.uri = uri
-    this.binaryType = binaryType || (typeof process !== 'undefined' && process.env.NODE_ENV === 'production' ? 'arraybuffer' : 'blob')
+    this.binaryType = typeof TextEncoder === 'undefined' ? 'blob' : binaryType
     this.id = 10
     this.sendQueue = []
     this.callbacks = new Map()

@@ -10,8 +10,7 @@
     "build": "npm run build-mjs && npm run build-cjs"
   },
   "dependencies": {
-    "reconnecting-websocket": "^3.2.2",
-    "text-encoding": "^0.6.4"
+    "reconnecting-websocket": "^3.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
