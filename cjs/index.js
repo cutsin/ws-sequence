@@ -33,14 +33,15 @@ var WS = function () {
     var _this = this;
 
     var uri = _ref.uri,
-        _ref$binaryType = _ref.binaryType,
-        binaryType = _ref$binaryType === undefined ? defaultBinaryType : _ref$binaryType,
+        binaryType = _ref.binaryType,
         ping = _ref.ping;
 
     _classCallCheck(this, WS);
 
     this.uri = uri;
-    this.binaryType = typeof TextEncoder === 'undefined' ? 'blob' : binaryType;
+    if (!binaryType) binaryType = defaultBinaryType;
+    if (typeof TextEncoder === 'undefined') binaryType = 'blob';
+    this.binaryType = binaryType;
     this.id = 10;
     this.sendQueue = [];
     this.callbacks = new Map();

@@ -13,9 +13,11 @@ const getMsg = evt => {
 }
 
 class WS {
-  constructor ({uri, binaryType = defaultBinaryType, ping}) {
+  constructor ({uri, binaryType, ping}) {
     this.uri = uri
-    this.binaryType = typeof TextEncoder === 'undefined' ? 'blob' : binaryType
+    if (!binaryType) binaryType = defaultBinaryType
+    if (typeof TextEncoder === 'undefined') binaryType = 'blob'
+    this.binaryType = binaryType
     this.id = 10
     this.sendQueue = []
     this.callbacks = new Map()
