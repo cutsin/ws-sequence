@@ -1,23 +1,22 @@
 {
   "name": "ws-sequence",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "Websocket Sequence",
-  "main": "cjs/index.js",
-  "module": "mjs/index.js",
+  "main": "dist/wseq-cjs.js",
+  "module": "dist/wseq.mjs",
   "scripts": {
-    "build-mjs": "node_modules/babel-cli/bin/babel.js src --out-dir mjs",
-    "build-cjs": "node_modules/babel-cli/bin/babel.js src --out-dir cjs --presets env,stage-0 --no-babelrc",
-    "build": "npm run build-mjs && npm run build-cjs"
+    "build": "npx rollup -c"
   },
   "dependencies": {
-    "reconnecting-websocket": "^3.2.2"
+    "reconnecting-websocket": "^4.1.10"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1"
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "rollup": "1.10.1",
+    "rollup-plugin-babel": "^4.3.2"
   },
+  "browserslist": "ie 11",
   "repository": {
     "type": "git",
     "url": "git@github.com:cutsin/ws-sequence.git"
