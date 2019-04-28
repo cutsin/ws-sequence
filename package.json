@@ -1,6 +1,6 @@
 {
   "name": "ws-sequence",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "Websocket Sequence",
   "main": "dist/wseq-cjs.js",
   "module": "dist/wseq.mjs",

@@ -13,7 +13,7 @@ const getMsg = evt => {
 }
 
 class WS {
-  constructor ({uri, binaryType, ping}) {
+  constructor ({uri, binaryType, ping, options}) {
     this.uri = uri
     if (!binaryType) binaryType = defaultBinaryType
     if (typeof TextEncoder === 'undefined') binaryType = 'blob'
@@ -33,7 +33,7 @@ class WS {
 
     let connected = ConnectedSockets[uri]
     if (connected) return (this.ws = connected)
-    this.ws = connected = ConnectedSockets[uri] = new ReconnectingWebSocket(uri)
+    this.ws = connected = ConnectedSockets[uri] = new ReconnectingWebSocket(uri, [], options)
     // send msg records before open
     this.ws.addEventListener('open', () => {
       this.ws.binaryType = this.binaryType
