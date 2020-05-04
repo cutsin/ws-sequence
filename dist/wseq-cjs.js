@@ -5,6 +5,8 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var ReconnectingWebSocket = _interopDefault(require('reconnecting-websocket'));
 
 function _typeof(obj) {
+  "@babel/helpers - typeof";
+
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function (obj) {
       return typeof obj;
@@ -54,9 +56,7 @@ var getMsg = function getMsg(evt) {
   return JSON.parse(msg);
 };
 
-var WS =
-/*#__PURE__*/
-function () {
+var WS = /*#__PURE__*/function () {
   function WS(_ref) {
     var _this = this;
 
@@ -76,11 +76,12 @@ function () {
     this.callbacks = new Map(); // ping for no idle & never disconnect
 
     this.keeper = null;
+    this.pingFrame = ping || '💧';
 
     this.keeping = function () {
       clearTimeout(_this.keeper);
       _this.keeper = setTimeout(function () {
-        _this.send(ping || '💧');
+        _this.send(_this.pingFrame);
 
         _this.keeping();
       }, 55000);
@@ -128,11 +129,9 @@ function () {
         msg = JSON.stringify(msg);
       }
 
-      var data = this.binaryType === 'arraybuffer' ? new TextEncoder().encode(msg).buffer : msg;
-
       if (this.ws.readyState === 1) {
-        this.ws.send(data);
-      } else {
+        this.ws.send(this.binaryType === 'arraybuffer' ? new TextEncoder().encode(msg).buffer : msg);
+      } else if (msg !== this.pingFrame) {
         this.sendQueue.push(msg);
       }
     }

@@ -23,10 +23,11 @@ class WS {
     this.callbacks = new Map()
     // ping for no idle & never disconnect
     this.keeper = null
+    this.pingFrame = ping || '💧'
     this.keeping = () => {
       clearTimeout(this.keeper)
       this.keeper = setTimeout(() => {
-        this.send(ping || '💧')
+        this.send(this.pingFrame)
         this.keeping()
       }, 55000)
     }
@@ -61,10 +62,9 @@ class WS {
       if (cb) this.callbacks.set(msg.id, cb)
       msg = JSON.stringify(msg)
     }
-    const data = this.binaryType === 'arraybuffer' ? new TextEncoder().encode(msg).buffer : msg
     if (this.ws.readyState === 1) {
-      this.ws.send(data)
-    } else {
+      this.ws.send(this.binaryType === 'arraybuffer' ? new TextEncoder().encode(msg).buffer : msg)
+    } else if (msg !== this.pingFrame) {
       this.sendQueue.push(msg)
     }
   }
