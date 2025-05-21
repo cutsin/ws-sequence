@@ -32,9 +32,14 @@ class WS {
       }, 55000)
     }
 
-    let connected = ConnectedSockets[uri]
-    if (connected) return (this.ws = connected)
-    this.ws = connected = ConnectedSockets[uri] = new ReconnectingWebSocket(uri, [], options)
+    // Handle the underlying WebSocket connection
+    if (ConnectedSockets[uri]) {
+      this.ws = ConnectedSockets[uri];
+    } else {
+      this.ws = new ReconnectingWebSocket(uri, [], options);
+      ConnectedSockets[uri] = this.ws; // Cache the actual RWS instance
+    }
+
     // send msg records before open
     this.ws.addEventListener('open', () => {
       this.ws.binaryType = this.binaryType
